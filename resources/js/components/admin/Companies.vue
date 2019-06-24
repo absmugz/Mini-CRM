@@ -22,63 +22,75 @@
                     </tr>
                 </tbody>
             </table>
-            <modal @close="endEditing" :product="editingItem" v-show="editingItem != null"></modal>
-            <modal @close="addCompany"  :product="addingCompany" v-show="addingCompany != null"></modal>
-            <br>
+        <modal @close="endEditing" :company="editingItem" v-show="editingItem != null"></modal>
+        <modal @close="addCompany"  :company="addingCompany" v-show="addingCompany != null"></modal>
+        <br>
             <button class="btn btn-primary" @click="newProduct">Add New Company</button>
         </div>
     </template>
-
-    <script>
+<script>
     import Modal from './ProductModal'
-
-    export default {
-        data() {
+	export default {
+        data(){
             return {
-                companies: [],
-                editingItem: null,
-                addingCompany: null
+                companies : [],
+                editingItem : null,
+                addingCompany : null
             }
         },
-        components: {Modal},
-        beforeMount() {
-            axios.get('/api/companies/').then(response => this.companies = response.data)
+        components : {
+            Modal
         },
-        methods: {
-            newProduct() {
+        beforeMount(){
+            axios.get('/api/companies/')
+            .then(response => {
+                this.companies = response.data
+            })
+            .catch(error => {
+                console.error(error);
+            })     
+        },
+        methods : {
+            newProduct(){
                 this.addingCompany = {
-
-                    name: null,
-                    email: null,
-                    description: null,
-                    logo: null,
-                    url: null,
+                    name : null, 
+                    email : null, 
+                    url : null,
+                    description : null,
+                    logo : null
                 }
             },
-            endEditing(company) {
+            editingItem(company){
                 this.editingItem = null
-
                 let index = this.companies.indexOf(company)
-                let name = company.name
-                let email = company.email
-                let description = company.description
-                let url = company.url
-
-                axios.put(`/api/companies/${company.id}`, {name, email, description, url})
-                     .then(response => this.companies[index] = company)
+                axios.put(`/api/companies/${company.id}`,{
+                    name  : product.name,
+                    email : product.email,
+                    url : product.url,
+                    description : product.description,
+                })
+                .then(response =>{
+                    this.companies[index] = company
+                })
+                .catch(response => {
+                })
             },
-            addCompany(company) {
+            addCompany(company){
                 this.addingCompany = null
-
-                let name = company.name
-                let email = company.email
-                let description = company.description
-                let url = company.url
-                let logo = company.logo 
-
-                axios.post("/api/companies/", {name, email, description, url, logo})
-                     .then(response => this.companies.push(company))
+                axios.post("/api/companies/",{
+                    name  : company.name,
+                    email : company.email,
+                    url : company.price,
+                    description : company.description,
+                    logo : product.logo
+                })
+                .then(response =>{
+                    this.companies.push(company)
+                })
+                .catch(response => {
+                })
             }
         }
     }
-    </script>
+</script>
+    

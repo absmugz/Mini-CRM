@@ -19,6 +19,7 @@ import Login from './views/Login'
 import Register from './views/Register'
 import UserBoard from './views/UserBoard'
 import Admin from './views/Admin'
+import SingleCompany from './views/SingleCompany'
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
@@ -55,6 +56,11 @@ const router = new VueRouter({
             path: '/register',
             name: 'register',
             component: Register
+        },,
+        {
+            path: '/companies/:id',
+            name: 'single-company',
+            component: SingleCompany
         },
         {
             path: '/dashboard',

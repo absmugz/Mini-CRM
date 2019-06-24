@@ -11,7 +11,7 @@
                                 <router-link :to="{ path: '/companies/'+company.id}">
                                     <img :src="company.logo" :alt="company.name" class="company img-responsive" >
                                     <h5><span v-html="company.name"></span>
-                                        <span class="small-text text-muted float-right">$ {{company.email}}</span>
+                                        <span class="small-text text-muted float-right">{{company.email}}</span>
                                     </h5>
                                     <button class="col-md-4 btn btn-sm btn-primary float-right">View Profile</button>
                                 </router-link>
