@@ -12,16 +12,18 @@ class CompanyController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        //
-    }
-
+    
     /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function index()
+    {
+        return response()->json(Company::all(),200);
+    }
+    
     public function create()
     {
         //
@@ -36,6 +38,20 @@ class CompanyController extends Controller
     public function store(Request $request)
     {
         //
+        $company = Company::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'logo' => $request->logo,
+            'description' => $request->description,
+            'url' => $request->url
+            
+        ]);
+
+        return response()->json([
+            'status' => (bool) $company,
+            'data'   => $company,
+            'message' => $company ? 'Company Created!' : 'Error Creating Company'
+        ]);
     }
 
     /**
@@ -47,6 +63,7 @@ class CompanyController extends Controller
     public function show(Company $company)
     {
         //
+        return response()->json($company,200); 
     }
 
     /**
@@ -69,7 +86,14 @@ class CompanyController extends Controller
      */
     public function update(Request $request, Company $company)
     {
-        //
+        $status = $product->update(
+            $request->only(['name', 'email', 'logo', 'description', 'url'])
+        );
+
+        return response()->json([
+            'status' => $status,
+            'message' => $status ? 'Company Updated!' : 'Error Updating Company'
+        ]);
     }
 
     /**
@@ -80,6 +104,21 @@ class CompanyController extends Controller
      */
     public function destroy(Company $company)
     {
-        //
+        $status = $company->delete();
+
+        return response()->json([
+            'status' => $status,
+            'message' => $status ? 'Company Deleted!' : 'Error Deleting Company'
+        ]);
     }
+
+    public function uploadFile(Request $request)
+        {
+            if($request->hasFile('logo')){
+                $name = time()."_".$request->file('logo')->getClientOriginalName();
+                $request->file('image')->move(public_path('images'), $name);
+            }
+            return response()->json(asset("images/$name"),201);
+        }
+    
 }
