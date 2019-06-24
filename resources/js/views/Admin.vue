@@ -10,7 +10,6 @@
                             <li class="active"><button class="btn" @click="setComponent('main')">Dashboard</button></li>
                             <li><button class="btn" @click="setComponent('companies')">Companies</button></li>
                             <li><button class="btn" @click="setComponent('users')">Users</button></li>
-                            <li><button class="btn" @click="setComponent('create-companies')">Create Company</button></li>
                         </ul>
                     </div>
                     <div class="col-md-9">

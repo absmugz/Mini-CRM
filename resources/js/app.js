@@ -20,6 +20,8 @@ import Register from './views/Register'
 import UserBoard from './views/UserBoard'
 import Admin from './views/Admin'
 import SingleCompany from './views/SingleCompany'
+import CreateCompanyComponent from './components/admin/CreateCompanyComponent'
+
 
 /**
  * The following block of code may be used to automatically register your
@@ -85,6 +87,14 @@ const router = new VueRouter({
             path: '/admin',
             name: 'admin',
             component: Admin,
+            meta: { 
+                requiresAuth: true,
+                is_admin : true
+            }
+        }, {
+            path: '/create-company',
+            name: 'create-company',
+            component: CreateCompanyComponent,
             meta: { 
                 requiresAuth: true,
                 is_admin : true
