@@ -13,6 +13,7 @@ class CompaniesTableSeeder extends Seeder
     public function run()
     {
         //'name', 'email', 'logo', 'description', 'url'
+        /*
         $c1 = new Company;
         $c1->name = 'Roam.Africa';
         $c1->email = 'roam@roam.com';
@@ -21,7 +22,9 @@ class CompaniesTableSeeder extends Seeder
         tempor incididunt ut labore et dolore magna aliqua consequat.';
         $c1->url = 'https://roam.africa/';
 
-        $c1->save();
+        $c1->save();*/
+
+        factory(App\Company::class, 20)->create();
 
     }
 }
