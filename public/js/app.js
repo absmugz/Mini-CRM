@@ -38344,7 +38344,7 @@ var render = function() {
                 [
                   _c(
                     "router-link",
-                    { attrs: { to: { path: "/products/" + company.id } } },
+                    { attrs: { to: { path: "/companies/" + company.id } } },
                     [
                       _c("img", {
                         staticClass: "company img-responsive",

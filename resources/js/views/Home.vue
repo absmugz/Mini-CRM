@@ -8,7 +8,7 @@
                     <div class="col-md-12">
                         <div class="row">
                             <div class="col-md-6 product-box" v-for="(company,index) in companies" :key="index">
-                                <router-link :to="{ path: '/products/'+company.id}">
+                                <router-link :to="{ path: '/companies/'+company.id}">
                                     <img :src="company.logo" :alt="company.name" class="company img-responsive" >
                                     <h5><span v-html="company.name"></span>
                                         <span class="small-text text-muted float-right">$ {{company.email}}</span>
