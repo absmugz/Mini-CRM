@@ -10,6 +10,7 @@
                             <li class="active"><button class="btn" @click="setComponent('main')">Dashboard</button></li>
                             <li><button class="btn" @click="setComponent('companies')">Companies</button></li>
                             <li><button class="btn" @click="setComponent('users')">Users</button></li>
+                            <li><button class="btn" @click="setComponent('create-companies')">Create Company</button></li>
                         </ul>
                     </div>
                     <div class="col-md-9">
@@ -24,6 +25,9 @@
     import Main from '../components/admin/Main'
     import Users from '../components/admin/Users'
     import Companies from '../components/admin/Companies'
+    import CreateCompanyComponent from '../components/admin/CreateCompanyComponent'
+    import EditCompanyComponent from '../components/admin/EditCompanyComponent'
+    
 
     export default {
         data() {
@@ -33,7 +37,7 @@
             }
         },
         components: {
-        Main, Users, Companies
+        Main, Users, Companies, CreateCompanyComponent, EditCompanyComponent
 
         },
        beforeMount(){
@@ -52,6 +56,14 @@
                     case "companies":
                         this.activeComponent = Companies
                         this.$router.push({name: 'admin-pages', params: {page: 'companies'}})
+                        break;
+                    case "create-companies":
+                        this.activeComponent = CreateCompanyComponent
+                        this.$router.push({name: 'admin-pages', params: {page: 'create-companies'}})
+                        break;
+                    case "edit-companies":
+                        this.activeComponent = EditCompanyComponent
+                        this.$router.push({name: 'admin-pages', params: {page: 'edit-companies'}})
                         break;
                     default:
                         this.activeComponent = Main
