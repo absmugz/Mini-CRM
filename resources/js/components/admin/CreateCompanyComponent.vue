@@ -40,7 +40,7 @@
         <div class="col-md-12">
           <div class="form-group">
          <strong>Company Logo:</strong>
-         <input type="file" class="form-control">
+         <input type="text" class="form-control" v-model="company.logo">
         </div>
         </div>
         </div>
@@ -57,13 +57,22 @@
     export default {
         data(){
         return {
-          company:{}
+          company:{},
+          errors:{},
         }
     },
     methods: {
 
     addCompany(){
-            console.log(this.company);
+            //console.log(this.company);this.errors = {};
+      axios.post('/api/companies/create', this.company).then(response => {
+        alert('Message sent!');
+      }).catch(error => {
+        if (error.response.status === 422) {
+          this.errors = error.response.data.errors || {};
+        }
+      });
+            
     }
 
     }

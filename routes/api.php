@@ -15,13 +15,6 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
-*/
-
-Route::post('login', 'UserController@login');
-Route::post('register', 'UserController@register');
-Route::get('/companies', 'CompanyController@index');
-Route::post('/upload-file', 'CompanyController@uploadFile');
-Route::get('/companies/{company}', 'CompanyController@show');
 
 Route::group(['middleware' => 'auth:api'], function(){
     Route::get('/users','UserController@index');
@@ -29,5 +22,16 @@ Route::group(['middleware' => 'auth:api'], function(){
     Route::patch('users/{user}','UserController@update');
     Route::resource('/companies', 'CompanyController')->except(['index','show']);
 });
+
+*/
+
+Route::post('login', 'UserController@login');
+Route::post('register', 'UserController@register');
+Route::post('/companies/create', 'CompanyController@store');
+Route::get('/companies', 'CompanyController@index');
+Route::post('/upload-file', 'CompanyController@uploadFile');
+Route::get('/companies/{company}', 'CompanyController@show');
+
+
 
 
