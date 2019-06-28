@@ -23,7 +23,7 @@
                     <td>{{ company.name }}</td>
                     <td>{{ company.description }}</td>
                     <td><router-link :to="{name: 'edit-company', params: { id: company.id }}" class="btn btn-primary">Edit</router-link></td>
-                    <td><button class="btn btn-danger">Delete</button></td>
+                      <td><button class="btn btn-danger" @click.prevent="deleteCompany(company.id)">Delete</button></td>
                 </tr>
             </tbody>
         </table>
@@ -44,6 +44,20 @@
             .catch(error => {
                 console.error(error);
             })     
+        },
+         methods: {
+      deleteCompany(id)
+      {
+      //console.log(id)
+      
+      let url = `/api/companies/delete/${id}`
+      //console.log(url)
+         axios.post(url).then(
+          response => {
+          this.companies.splice(this.companies.indexOf(id), 1);
         }
+        )
+      }
+    }
   }
 </script>

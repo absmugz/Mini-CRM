@@ -53,7 +53,7 @@
         </div>
         <br />
         <div class="form-group">
-          <button class="btn btn-primary">Create Company</button>
+          <button class="btn btn-primary">Update Company</button>
         </div>
     </form>
     </div>
@@ -85,6 +85,7 @@
           this.company = {}; //Clear input fields.
           this.loaded = true;
           this.success = true;
+          this.$router.push({name: 'admin'});
         }).catch(error => {
           this.loaded = true;
           if (error.response.status === 422) {

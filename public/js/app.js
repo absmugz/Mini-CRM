@@ -1884,6 +1884,18 @@ __webpack_require__.r(__webpack_exports__);
     })["catch"](function (error) {
       console.error(error);
     });
+  },
+  methods: {
+    deleteCompany: function deleteCompany(id) {
+      var _this2 = this;
+
+      //console.log(id)
+      var url = "/api/companies/delete/".concat(id); //console.log(url)
+
+      axios.post(url).then(function (response) {
+        _this2.companies.splice(_this2.companies.indexOf(id), 1);
+      });
+    }
   }
 });
 
@@ -2097,6 +2109,10 @@ __webpack_require__.r(__webpack_exports__);
 
           _this2.loaded = true;
           _this2.success = true;
+
+          _this2.$router.push({
+            name: 'admin'
+          });
         })["catch"](function (error) {
           _this2.loaded = true;
 
@@ -38916,7 +38932,21 @@ var render = function() {
               1
             ),
             _vm._v(" "),
-            _vm._m(1, true)
+            _c("td", [
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-danger",
+                  on: {
+                    click: function($event) {
+                      $event.preventDefault()
+                      return _vm.deleteCompany(company.id)
+                    }
+                  }
+                },
+                [_vm._v("Delete")]
+              )
+            ])
           ])
         }),
         0
@@ -38939,14 +38969,6 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("th", [_vm._v("Actions")])
       ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("td", [
-      _c("button", { staticClass: "btn btn-danger" }, [_vm._v("Delete")])
     ])
   }
 ]
@@ -39429,7 +39451,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "form-group" }, [
       _c("button", { staticClass: "btn btn-primary" }, [
-        _vm._v("Create Company")
+        _vm._v("Update Company")
       ])
     ])
   }
