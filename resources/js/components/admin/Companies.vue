@@ -22,7 +22,7 @@
                     <td>{{ company.id }}</td>
                     <td>{{ company.name }}</td>
                     <td>{{ company.description }}</td>
-                    <td><router-link :to="{name: 'edit', params: { id: company.id }}" class="btn btn-primary">Edit</router-link></td>
+                    <td><router-link :to="{name: 'edit-company', params: { id: company.id }}" class="btn btn-primary">Edit</router-link></td>
                     <td><button class="btn btn-danger">Delete</button></td>
                 </tr>
             </tbody>

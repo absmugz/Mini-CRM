@@ -21,6 +21,7 @@ import UserBoard from './views/UserBoard'
 import Admin from './views/Admin'
 import SingleCompany from './views/SingleCompany'
 import CreateCompanyComponent from './components/admin/CreateCompanyComponent'
+import EditCompanyComponent from './components/admin/EditCompanyComponent'
 
 
 /**
@@ -95,6 +96,14 @@ const router = new VueRouter({
             path: '/create-company',
             name: 'create-company',
             component: CreateCompanyComponent,
+            meta: { 
+                requiresAuth: true,
+                is_admin : true
+            }
+        }, {
+            path: '/edit-company/:id',
+            name: 'edit-company',
+            component: EditCompanyComponent,
             meta: { 
                 requiresAuth: true,
                 is_admin : true

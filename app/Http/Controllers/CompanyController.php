@@ -89,6 +89,7 @@ class CompanyController extends Controller
     public function edit(Company $company)
     {
         //
+        return response()->json($company,200); 
     }
 
     /**
