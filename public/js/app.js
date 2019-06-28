@@ -1890,8 +1890,8 @@ __webpack_require__.r(__webpack_exports__);
       var _this2 = this;
 
       //console.log(id)
-      var url = "/api/companies/delete/".concat(id); //console.log(url)
-
+      var url = "/api/companies/delete/".concat(id);
+      console.log(url);
       axios.post(url).then(function (response) {
         _this2.companies.splice(_this2.companies.indexOf(id), 1);
       });
@@ -1971,27 +1971,48 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      company: {},
+      //company:{},
+      name: '',
+      email: '',
+      description: '',
+      url: '',
+      logo: '',
       errors: {},
       success: false,
-      loaded: true
+      loaded: true,
+      selectedFile: null
     };
   },
   methods: {
-    addCompany: function addCompany() {
+    onFileSelected: function onFileSelected(event) {
+      console.log(event);
+      this.logo = event.target.files[0];
+      console.log(this.logo);
+    },
+    addCompany: function addCompany(event) {
       var _this = this;
 
       if (this.loaded) {
+        var config = {
+          headers: {
+            'content-type': 'multipart/form-data'
+          }
+        };
+        var formData = new FormData();
+        formData.append('logo', this.logo);
+        formData.append('name', this.name);
+        formData.append('email', this.email);
+        formData.append('description', this.description);
+        formData.append('url', this.url);
+        formData.append('logo', this.logo);
         this.loaded = false;
         this.success = false;
         this.errors = {};
-        axios.post('/api/companies/create', this.company).then(function (response) {
-          _this.company = {}; //Clear input fields.
-
+        axios.post('/api/companies/create', formData, config).then(function (response) {
+          //this.company = {}; //Clear input fields.
           _this.loaded = true;
           _this.success = true;
         })["catch"](function (error) {
@@ -39024,19 +39045,19 @@ var render = function() {
                     {
                       name: "model",
                       rawName: "v-model",
-                      value: _vm.company.name,
-                      expression: "company.name"
+                      value: _vm.name,
+                      expression: "name"
                     }
                   ],
                   staticClass: "form-control",
                   attrs: { type: "text" },
-                  domProps: { value: _vm.company.name },
+                  domProps: { value: _vm.name },
                   on: {
                     input: function($event) {
                       if ($event.target.composing) {
                         return
                       }
-                      _vm.$set(_vm.company, "name", $event.target.value)
+                      _vm.name = $event.target.value
                     }
                   }
                 }),
@@ -39060,19 +39081,19 @@ var render = function() {
                     {
                       name: "model",
                       rawName: "v-model",
-                      value: _vm.company.email,
-                      expression: "company.email"
+                      value: _vm.email,
+                      expression: "email"
                     }
                   ],
                   staticClass: "form-control",
                   attrs: { type: "text" },
-                  domProps: { value: _vm.company.email },
+                  domProps: { value: _vm.email },
                   on: {
                     input: function($event) {
                       if ($event.target.composing) {
                         return
                       }
-                      _vm.$set(_vm.company, "email", $event.target.value)
+                      _vm.email = $event.target.value
                     }
                   }
                 }),
@@ -39096,19 +39117,19 @@ var render = function() {
                     {
                       name: "model",
                       rawName: "v-model",
-                      value: _vm.company.description,
-                      expression: "company.description"
+                      value: _vm.description,
+                      expression: "description"
                     }
                   ],
                   staticClass: "form-control",
                   attrs: { rows: "5" },
-                  domProps: { value: _vm.company.description },
+                  domProps: { value: _vm.description },
                   on: {
                     input: function($event) {
                       if ($event.target.composing) {
                         return
                       }
-                      _vm.$set(_vm.company, "description", $event.target.value)
+                      _vm.description = $event.target.value
                     }
                   }
                 }),
@@ -39132,19 +39153,19 @@ var render = function() {
                     {
                       name: "model",
                       rawName: "v-model",
-                      value: _vm.company.url,
-                      expression: "company.url"
+                      value: _vm.url,
+                      expression: "url"
                     }
                   ],
                   staticClass: "form-control",
                   attrs: { type: "text" },
-                  domProps: { value: _vm.company.url },
+                  domProps: { value: _vm.url },
                   on: {
                     input: function($event) {
                       if ($event.target.composing) {
                         return
                       }
-                      _vm.$set(_vm.company, "url", $event.target.value)
+                      _vm.url = $event.target.value
                     }
                   }
                 }),
@@ -39164,32 +39185,10 @@ var render = function() {
                 _c("strong", [_vm._v("Company Logo:")]),
                 _vm._v(" "),
                 _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.company.logo,
-                      expression: "company.logo"
-                    }
-                  ],
                   staticClass: "form-control",
-                  attrs: { type: "text" },
-                  domProps: { value: _vm.company.logo },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.$set(_vm.company, "logo", $event.target.value)
-                    }
-                  }
-                }),
-                _vm._v(" "),
-                _vm.errors && _vm.errors.logo
-                  ? _c("div", { staticClass: "text-danger" }, [
-                      _vm._v(_vm._s(_vm.errors.logo[0]))
-                    ])
-                  : _vm._e()
+                  attrs: { type: "file" },
+                  on: { change: _vm.onFileSelected }
+                })
               ])
             ])
           ]),

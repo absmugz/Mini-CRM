@@ -47,10 +47,13 @@ class CompanyController extends Controller
         ]);
 
 
+        $companyLogo = time().'.'.$request->logo->getClientOriginalExtension();
+        $request->logo->move(public_path('images'), $companyLogo);
+
         $company = Company::create([
-            'name' => $request->name,
+            'name' =>  $request->name,
             'email' => $request->email,
-            'logo' => $request->logo,
+            'logo' =>  $companyLogo,
             'description' => $request->description,
             'url' => $request->url
             
@@ -138,11 +141,14 @@ class CompanyController extends Controller
 
     public function uploadFile(Request $request)
         {
-            if($request->hasFile('logo')){
-                $name = time()."_".$request->file('logo')->getClientOriginalName();
-                $request->file('image')->move(public_path('images'), $name);
-            }
-            return response()->json(asset("images/$name"),201);
+
+        //$imageName = time().'.'.$request->image->getClientOriginalExtension();
+        $name = time()."_".$request->file('image')->getClientOriginalName();
+        $request->image->move(public_path('images'), $name);
+        
+        return response()->json(['logo'=>$name]);
+        
+          
         }
     
 }

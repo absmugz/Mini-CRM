@@ -51,7 +51,7 @@
       //console.log(id)
       
       let url = `/api/companies/delete/${id}`
-      //console.log(url)
+      console.log(url)
          axios.post(url).then(
           response => {
           this.companies.splice(this.companies.indexOf(id), 1);
