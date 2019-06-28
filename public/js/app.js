@@ -1953,25 +1953,43 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       company: {},
-      errors: {}
+      errors: {},
+      success: false,
+      loaded: true
     };
   },
   methods: {
     addCompany: function addCompany() {
       var _this = this;
 
-      //console.log(this.company);this.errors = {};
-      axios.post('/api/companies/create', this.company).then(function (response) {
-        alert('Message sent!');
-      })["catch"](function (error) {
-        if (error.response.status === 422) {
-          _this.errors = error.response.data.errors || {};
-        }
-      });
+      if (this.loaded) {
+        this.loaded = false;
+        this.success = false;
+        this.errors = {};
+        axios.post('/api/companies/create', this.company).then(function (response) {
+          _this.company = {}; //Clear input fields.
+
+          _this.loaded = true;
+          _this.success = true;
+        })["catch"](function (error) {
+          _this.loaded = true;
+
+          if (error.response.status === 422) {
+            _this.errors = error.response.data.errors || {};
+          }
+        });
+      }
     }
   }
 });
@@ -38840,6 +38858,12 @@ var render = function() {
     _c("div", [
       _c("h1", [_vm._v("Create A Company")]),
       _vm._v(" "),
+      _vm.success
+        ? _c("div", { staticClass: "alert alert-success mt-3" }, [
+            _vm._v("\n                Company created!\n    ")
+          ])
+        : _vm._e(),
+      _vm._v(" "),
       _c(
         "form",
         {
@@ -38876,7 +38900,13 @@ var render = function() {
                       _vm.$set(_vm.company, "name", $event.target.value)
                     }
                   }
-                })
+                }),
+                _vm._v(" "),
+                _vm.errors && _vm.errors.name
+                  ? _c("div", { staticClass: "text-danger" }, [
+                      _vm._v(_vm._s(_vm.errors.name[0]))
+                    ])
+                  : _vm._e()
               ])
             ])
           ]),
@@ -38906,7 +38936,13 @@ var render = function() {
                       _vm.$set(_vm.company, "email", $event.target.value)
                     }
                   }
-                })
+                }),
+                _vm._v(" "),
+                _vm.errors && _vm.errors.email
+                  ? _c("div", { staticClass: "text-danger" }, [
+                      _vm._v(_vm._s(_vm.errors.email[0]))
+                    ])
+                  : _vm._e()
               ])
             ])
           ]),
@@ -38936,7 +38972,13 @@ var render = function() {
                       _vm.$set(_vm.company, "description", $event.target.value)
                     }
                   }
-                })
+                }),
+                _vm._v(" "),
+                _vm.errors && _vm.errors.description
+                  ? _c("div", { staticClass: "text-danger" }, [
+                      _vm._v(_vm._s(_vm.errors.description[0]))
+                    ])
+                  : _vm._e()
               ])
             ])
           ]),
@@ -38966,7 +39008,13 @@ var render = function() {
                       _vm.$set(_vm.company, "url", $event.target.value)
                     }
                   }
-                })
+                }),
+                _vm._v(" "),
+                _vm.errors && _vm.errors.url
+                  ? _c("div", { staticClass: "text-danger" }, [
+                      _vm._v(_vm._s(_vm.errors.url[0]))
+                    ])
+                  : _vm._e()
               ])
             ])
           ]),
@@ -38996,7 +39044,13 @@ var render = function() {
                       _vm.$set(_vm.company, "logo", $event.target.value)
                     }
                   }
-                })
+                }),
+                _vm._v(" "),
+                _vm.errors && _vm.errors.logo
+                  ? _c("div", { staticClass: "text-danger" }, [
+                      _vm._v(_vm._s(_vm.errors.logo[0]))
+                    ])
+                  : _vm._e()
               ])
             ])
           ]),

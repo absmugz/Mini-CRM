@@ -38,6 +38,15 @@ class CompanyController extends Controller
     public function store(Request $request)
     {
         //
+        $this->validate($request, [
+            'name' => 'required|string',
+            'email' => 'required|email',
+            'logo' => 'required',
+            'description' => 'required',
+            'url' => 'required',
+        ]);
+
+
         $company = Company::create([
             'name' => $request->name,
             'email' => $request->email,
@@ -47,12 +56,17 @@ class CompanyController extends Controller
             
         ]);
 
-        return response()->json([
-            'status' => (bool) $company,
-            'data'   => $company,
-            'message' => $company ? 'Company Created!' : 'Error Creating Company'
-        ]);
-    }
+        return response()->json(null, 200);
+         /** 
+        *return response()->json([
+        *   'status' => (bool) $company,
+        *   'data'   => $company,
+        *   'message' => $company ? 'Company Created!' : 'Error Creating Company'
+        *]);
+         */
+        
+        }
+   
 
     /**
      * Display the specified resource.
