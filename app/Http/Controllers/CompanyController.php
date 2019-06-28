@@ -101,14 +101,23 @@ class CompanyController extends Controller
      */
     public function update(Request $request, Company $company)
     {
-        $status = $product->update(
+        $status = $company->update(
             $request->only(['name', 'email', 'logo', 'description', 'url'])
         );
+        
 
         return response()->json([
-            'status' => $status,
-            'message' => $status ? 'Company Updated!' : 'Error Updating Company'
-        ]);
+               'status' => $status,
+               'message' => $status ? 'Company Updated!' : 'Error Updating Company'
+               ]);
+        
+        /**
+        * Update the specified resource in storage.
+        * return response()->json([
+        *    'status' => $status,
+        *   'message' => $status ? 'Company Updated!' : 'Error Updating Company'
+        * ]);
+        */
     }
 
     /**

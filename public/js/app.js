@@ -2087,12 +2087,24 @@ __webpack_require__.r(__webpack_exports__);
     updateCompany: function updateCompany() {
       var _this2 = this;
 
-      var uri = "http://vuelaravelcrud.test/api/post/update/".concat(this.$route.params.id);
-      this.axios.post(uri, this.post).then(function (response) {
-        _this2.$router.push({
-          name: 'posts'
+      if (this.loaded) {
+        this.loaded = false;
+        this.success = false;
+        this.errors = {};
+        var uri = "/api/companies/update/".concat(this.$route.params.id);
+        axios.post(uri, this.company).then(function (response) {
+          _this2.company = {}; //Clear input fields.
+
+          _this2.loaded = true;
+          _this2.success = true;
+        })["catch"](function (error) {
+          _this2.loaded = true;
+
+          if (error.response.status === 422) {
+            _this2.errors = error.response.data.errors || {};
+          }
         });
-      });
+      }
     }
   }
 });

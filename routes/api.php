@@ -29,6 +29,7 @@ Route::post('login', 'UserController@login');
 Route::post('register', 'UserController@register');
 Route::post('/companies/create', 'CompanyController@store');
 Route::get('/companies/edit/{company}', 'CompanyController@edit');
+Route::post('/companies/update/{company}', 'CompanyController@update');
 Route::get('/companies', 'CompanyController@index');
 Route::post('/upload-file', 'CompanyController@uploadFile');
 Route::get('/companies/{company}', 'CompanyController@show');

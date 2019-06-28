@@ -75,12 +75,24 @@
         axios.get(url).then(response => this.company = response.data)
       },
       methods: {
-        updateCompany() {
-          let uri = `http://vuelaravelcrud.test/api/post/update/${this.$route.params.id}`;
-          this.axios.post(uri, this.post).then((response) => {
-            this.$router.push({name: 'posts'});
-          });
-        }
+    updateCompany() {
+      if (this.loaded) {
+        this.loaded = false;
+        this.success = false;
+        this.errors = {};
+        let uri = `/api/companies/update/${this.$route.params.id}`
+        axios.post(uri, this.company).then(response => {
+          this.company = {}; //Clear input fields.
+          this.loaded = true;
+          this.success = true;
+        }).catch(error => {
+          this.loaded = true;
+          if (error.response.status === 422) {
+            this.errors = error.response.data.errors || {};
+          }
+        });
+      }
+    }
       }
     }
 </script>
