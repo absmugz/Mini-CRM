@@ -2013,6 +2013,11 @@ __webpack_require__.r(__webpack_exports__);
         this.errors = {};
         axios.post('/api/companies/create', formData, config).then(function (response) {
           //this.company = {}; //Clear input fields.
+          _this.name = '';
+          _this.email = '';
+          _this.description = '';
+          _this.url = '';
+          _this.logo = '';
           _this.loaded = true;
           _this.success = true;
         })["catch"](function (error) {

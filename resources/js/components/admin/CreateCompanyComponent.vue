@@ -85,10 +85,12 @@
 
 
       if (this.loaded) {
+
         const config = {
                     headers: { 'content-type': 'multipart/form-data' }
                 }
         let formData = new FormData();
+
         formData.append('logo', this.logo);
         formData.append('name', this.name);
         formData.append('email', this.email);
@@ -101,6 +103,11 @@
         
         axios.post('/api/companies/create', formData, config ).then(response => {
           //this.company = {}; //Clear input fields.
+          this.name = '';
+          this.email = '';
+          this.description = '';
+          this.url = '';
+          this.logo = '';
           this.loaded = true;
           this.success = true;
         }).catch(error => {
