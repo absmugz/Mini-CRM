@@ -111,7 +111,8 @@ class UserController extends Controller
             $status = $user->update(
                 $request->only(['name', 'email', 'company_id'])
             );
-            
+
+
     
             return response()->json([
                    'status' => $status,
