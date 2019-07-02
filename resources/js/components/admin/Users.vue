@@ -25,7 +25,7 @@
                     <td>{{ user.email }}</td>
                      <td v-if="user.company">{{ user.company.name }}</td>
                       <td v-else>No company assigned</td>
-                     <td><button class="btn btn-primary">Edit</button></td>
+                     <td><router-link :to="{name: 'edit-user', params: { id: user.id }}" class="btn btn-primary">Edit</router-link></td>
                     <td><button class="btn btn-danger" @click.prevent="deleteUser(user.id)">Delete</button></td>
                     
                 </tr>

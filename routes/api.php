@@ -37,6 +37,8 @@ Route::get('/companies/{company}', 'CompanyController@show');
 Route::get('/users', 'UserController@index');
 Route::post('/users/create', 'UserController@store');
 Route::post('/users/delete/{user}', 'UserController@destroy');
+Route::get('/users/edit/{user}', 'UserController@edit');
+Route::post('/users/update/{user}', 'UserController@update');
 
 
 

@@ -99,6 +99,35 @@ class UserController extends Controller
         }
 
 
+        public function edit(User $user)
+        {
+            //
+            return response()->json($user,200); 
+        }
+
+
+        public function update(Request $request, User $user)
+        {
+            $status = $user->update(
+                $request->only(['name', 'email', 'company_id'])
+            );
+            
+    
+            return response()->json([
+                   'status' => $status,
+                   'message' => $status ? 'User Updated!' : 'Error Updating User'
+                   ]);
+            
+            /**
+            * Update the specified resource in storage.
+            * return response()->json([
+            *    'status' => $status,
+            *   'message' => $status ? 'Company Updated!' : 'Error Updating Company'
+            * ]);
+            */
+        }
+
+
         public function destroy(User $user)
         {
             $status = $user->delete();

@@ -23,6 +23,7 @@ import SingleCompany from './views/SingleCompany'
 import CreateCompanyComponent from './components/admin/CreateCompanyComponent'
 import EditCompanyComponent from './components/admin/EditCompanyComponent'
 import CreateUserComponent from './components/admin/CreateUserComponent'
+import EditUserComponent from './components/admin/EditUserComponent'
 
 
 /**
@@ -113,6 +114,14 @@ const router = new VueRouter({
             path: '/create-user',
             name: 'create-user',
             component: CreateUserComponent,
+            meta: { 
+                requiresAuth: true,
+                is_admin : true
+            }
+        },{
+            path: '/edit-user/:id',
+            name: 'edit-user',
+            component: EditUserComponent,
             meta: { 
                 requiresAuth: true,
                 is_admin : true
