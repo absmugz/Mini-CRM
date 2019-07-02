@@ -2365,6 +2365,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2380,6 +2381,18 @@ __webpack_require__.r(__webpack_exports__);
     })["catch"](function (error) {
       console.error(error);
     });
+  },
+  methods: {
+    deleteUser: function deleteUser(id) {
+      var _this2 = this;
+
+      //console.log(id)
+      var url = "/api/users/delete/".concat(id);
+      console.log(url);
+      axios.post(url).then(function (response) {
+        _this2.users.splice(_this2.users.indexOf(id), 1);
+      });
+    }
   }
 });
 
@@ -39962,7 +39975,21 @@ var render = function() {
             _vm._v(" "),
             _vm._m(1, true),
             _vm._v(" "),
-            _vm._m(2, true)
+            _c("td", [
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-danger",
+                  on: {
+                    click: function($event) {
+                      $event.preventDefault()
+                      return _vm.deleteUser(user.id)
+                    }
+                  }
+                },
+                [_vm._v("Delete")]
+              )
+            ])
           ])
         }),
         0
@@ -39995,14 +40022,6 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("td", [
       _c("button", { staticClass: "btn btn-primary" }, [_vm._v("Edit")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("td", [
-      _c("button", { staticClass: "btn btn-danger" }, [_vm._v("Delete")])
     ])
   }
 ]

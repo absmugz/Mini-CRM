@@ -26,7 +26,8 @@
                      <td v-if="user.company">{{ user.company.name }}</td>
                       <td v-else>No company assigned</td>
                      <td><button class="btn btn-primary">Edit</button></td>
-                      <td><button class="btn btn-danger">Delete</button></td>
+                    <td><button class="btn btn-danger" @click.prevent="deleteUser(user.id)">Delete</button></td>
+                    
                 </tr>
             </tbody>
         </table>
@@ -48,6 +49,20 @@
             .catch(error => {
                 console.error(error);
             })     
+        },
+         methods: {
+      deleteUser(id)
+      {
+      //console.log(id)
+      
+      let url = `/api/users/delete/${id}`
+      console.log(url)
+         axios.post(url).then(
+          response => {
+          this.users.splice(this.users.indexOf(id), 1);
         }
+        )
+      }
+    }
     }
 </script>

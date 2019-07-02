@@ -36,6 +36,7 @@ Route::post('/upload-file', 'CompanyController@uploadFile');
 Route::get('/companies/{company}', 'CompanyController@show');
 Route::get('/users', 'UserController@index');
 Route::post('/users/create', 'UserController@store');
+Route::post('/users/delete/{user}', 'UserController@destroy');
 
 
 
