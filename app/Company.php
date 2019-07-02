@@ -10,7 +10,7 @@ class Company extends Model
         'name', 'email', 'logo', 'description', 'url'
     ];
 
-    public function employees(){
-        return $this->hasMany(Employee::class);
-    }
+    
+
+
 }
