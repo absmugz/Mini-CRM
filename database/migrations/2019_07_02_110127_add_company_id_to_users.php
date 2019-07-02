@@ -15,8 +15,7 @@ class AddCompanyIdToUsers extends Migration
     {
        
         Schema::table('users', function($table) { 
-
-            $table->bigInteger('company_id')->nullable()->unsigned();
+            $table->bigInteger('company_id')->unsigned()->nullable();
             $table->foreign('company_id')->references('id')->on('companies'); 
         });
      

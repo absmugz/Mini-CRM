@@ -13,7 +13,10 @@ class UserController extends Controller
 
     public function index()
     {
-        return response()->json(User::all(),200);
+        return response()->json(User::with('company')->get(),200);
+
+        //User::with('company')->get();
+   
     }
 
     public function store(Request $request)
@@ -29,11 +32,23 @@ class UserController extends Controller
             return response()->json(['error' => $validator->errors()], 401);
         }
 
-        $data = $request->only(['name', 'email', 'password']);
-        $data['password'] = bcrypt($data['password']);
+        //$data = $request->only(['name', 'email', 'password']);
+        //$data['password'] = bcrypt($data['password']);
 
-        $user = User::create($data);
-        $user->is_admin = 0;
+        //$user = User::create($data);
+        //$user->is_admin = 0;
+        //$user->company_id = 0;
+
+
+        $user = User::create([
+            'name' =>  $request->name,
+            'email' => $request->email,
+            'password' =>  bcrypt($request->password),
+            'is_admin' => 0,
+            'company_id' => $request->company
+        ]);
+
+        return response()->json(null, 200);
       
     }
 

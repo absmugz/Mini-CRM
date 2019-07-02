@@ -14,6 +14,7 @@
                 <th>ID</th>
                 <th>Name</th>
                 <th>Email</th>
+                <th>Company</th>
                 <th>Actions</th>
             </tr>
             </thead>
@@ -22,6 +23,8 @@
                     <td>{{ user.id }}</td>
                     <td>{{ user.name }}</td>
                     <td>{{ user.email }}</td>
+                     <td v-if="user.company">{{ user.company.name }}</td>
+                      <td v-else>No company assigned</td>
                      <td><button class="btn btn-primary">Edit</button></td>
                       <td><button class="btn btn-danger">Delete</button></td>
                 </tr>
