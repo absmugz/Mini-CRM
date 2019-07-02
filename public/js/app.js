@@ -2184,12 +2184,19 @@ __webpack_require__.r(__webpack_exports__);
   mounted: function mounted() {
     var _this = this;
 
-    axios.get('/api/users/').then(function (response) {
-      return _this.users = response.data;
-    });
     axios.get('/api/companies/').then(function (response) {
-      return _this.companies = response.data;
+      _this.companies = response.data;
+      console.error(_this.companies);
+    })["catch"](function (error) {
+      console.error(error);
     });
+    axios.get('/api/users/').then(function (response) {
+      _this.users = response.data;
+      console.error(_this.users);
+    })["catch"](function (error) {
+      console.error(error);
+    }); //axios.get('/api/users/').then(response => this.users = response.data)
+    //axios.get('/api/companies/').then(response => this.companies = response.data)
   }
 });
 
@@ -2228,6 +2235,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2239,6 +2253,7 @@ __webpack_require__.r(__webpack_exports__);
 
     axios.get('/api/users/').then(function (response) {
       _this.users = response.data;
+      console.log(_this.users);
     })["catch"](function (error) {
       console.error(error);
     });
@@ -39532,20 +39547,45 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _c("table", { staticClass: "table table-responsive table-striped" }, [
+    _c("h1", [_vm._v("Users")]),
+    _vm._v(" "),
+    _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col-md-9" }),
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "col-md-3" },
+        [
+          _c(
+            "router-link",
+            {
+              staticClass: "btn btn-primary",
+              attrs: { to: { name: "create-company" } }
+            },
+            [_vm._v("Create User")]
+          )
+        ],
+        1
+      )
+    ]),
+    _c("br"),
+    _vm._v(" "),
+    _c("table", { staticClass: "table table-hover" }, [
       _vm._m(0),
       _vm._v(" "),
       _c(
         "tbody",
-        _vm._l(_vm.users, function(user, index) {
-          return _c("tr", { key: index }, [
-            _c("td", [_vm._v(_vm._s(index + 1))]),
+        _vm._l(_vm.users, function(user) {
+          return _c("tr", { key: user.id }, [
+            _c("td", [_vm._v(_vm._s(user.id))]),
             _vm._v(" "),
             _c("td", [_vm._v(_vm._s(user.name))]),
             _vm._v(" "),
             _c("td", [_vm._v(_vm._s(user.email))]),
             _vm._v(" "),
-            _c("td", [_vm._v(_vm._s(user.created_at))])
+            _vm._m(1, true),
+            _vm._v(" "),
+            _vm._m(2, true)
           ])
         }),
         0
@@ -39560,14 +39600,30 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("thead", [
       _c("tr", [
-        _c("td"),
+        _c("th", [_vm._v("ID")]),
         _vm._v(" "),
-        _c("td", [_vm._v("Name")]),
+        _c("th", [_vm._v("Name")]),
         _vm._v(" "),
-        _c("td", [_vm._v("Email")]),
+        _c("th", [_vm._v("Email")]),
         _vm._v(" "),
-        _c("td", [_vm._v("Joined")])
+        _c("th", [_vm._v("Actions")])
       ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("td", [
+      _c("button", { staticClass: "btn btn-primary" }, [_vm._v("Edit")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("td", [
+      _c("button", { staticClass: "btn btn-danger" }, [_vm._v("Delete")])
     ])
   }
 ]

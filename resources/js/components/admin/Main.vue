@@ -19,8 +19,24 @@
             }
         },
         mounted() {
-            axios.get('/api/users/').then(response => this.users = response.data)
-            axios.get('/api/companies/').then(response => this.companies = response.data)
+            axios.get('/api/companies/')
+            .then(response => {
+                this.companies = response.data
+                console.error(this.companies)
+            })
+            .catch(error => {
+                console.error(error);
+            })     
+            axios.get('/api/users/')
+            .then(response => {
+                this.users = response.data
+                console.error(this.users)
+            })
+            .catch(error => {
+                console.error(error);
+            }) 
+            //axios.get('/api/users/').then(response => this.users = response.data)
+            //axios.get('/api/companies/').then(response => this.companies = response.data)
         }
     }
     </script>
