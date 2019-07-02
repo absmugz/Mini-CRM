@@ -4,7 +4,7 @@
         <div class="row">
           <div class="col-md-9"></div>
           <div class="col-md-3">
-            <router-link :to="{ name: 'create-company' }" class="btn btn-primary">Create User</router-link>
+            <router-link :to="{ name: 'create-user' }" class="btn btn-primary">Create User</router-link>
           </div>
         </div><br />
 
