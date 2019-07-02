@@ -40,10 +40,12 @@
 
              <div class="col-md-12">
           <div class="form-group">
-           <label for="sel1">Select list:</label>
+           
+           <label for="sel1">Select Company:</label>
   <select class="form-control" v-model="user.company">
-    <option v-for="company in companies" :key="company.id">{{ company.name }}</option>
+    <option v-for="company in companies" :key="company.id" :value="company.id">{{ company.name }}</option>
   </select>
+ 
           </div>
         </div>
 

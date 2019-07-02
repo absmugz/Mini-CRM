@@ -2106,6 +2106,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -39535,7 +39537,7 @@ var render = function() {
             _c("div", { staticClass: "col-md-12" }, [
               _c("div", { staticClass: "form-group" }, [
                 _c("label", { attrs: { for: "sel1" } }, [
-                  _vm._v("Select list:")
+                  _vm._v("Select Company:")
                 ]),
                 _vm._v(" "),
                 _c(
@@ -39571,9 +39573,11 @@ var render = function() {
                     }
                   },
                   _vm._l(_vm.companies, function(company) {
-                    return _c("option", { key: company.id }, [
-                      _vm._v(_vm._s(company.name))
-                    ])
+                    return _c(
+                      "option",
+                      { key: company.id, domProps: { value: company.id } },
+                      [_vm._v(_vm._s(company.name))]
+                    )
                   }),
                   0
                 )
