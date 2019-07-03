@@ -69,6 +69,14 @@ const router = new VueRouter({
             component: SingleCompany
         },
         {
+            path: '/dashboard/:page',
+            name: 'dashboard-pages',
+            component: UserBoard,
+            meta: { 
+                requiresAuth: true,
+                is_user : true
+            }
+        },{
             path: '/dashboard',
             name: 'userboard',
             component: UserBoard,
@@ -76,7 +84,7 @@ const router = new VueRouter({
                 requiresAuth: true,
                 is_user : true
             }
-        },
+        },,
         {
             path: '/admin/:page',
             name: 'admin-pages',

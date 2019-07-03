@@ -5,9 +5,14 @@
             </div>
             <div class="container">
                 <div class="row">
-                    <div class="col-md-12">
-                        <br>
-                        
+                    <div class="col-md-3">
+                        <ul style="list-style-type:none">
+                            <li class="active"><button class="btn" @click="setComponent('profile')">Profile</button></li>
+                             <li><button class="btn" @click="setComponent('edit-profile')">Edit Profile</button></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-9">
+                        <component :is="activeComponent"></component>
                     </div>
                 </div>
             </div>
@@ -21,18 +26,44 @@
     .title { font-size: 60px; color: #ffffff; }
     </style>
 
-      <script>
+    <script>
+
+    import Profile from '../components/user/Profile'
+    import EditProfileComponent from '../components/user/EditProfileComponent'
+
     export default {
         data() {
             return {
-                user : null
+                user : null,
+                 activeComponent: null
             }
         },
-        beforeMount() {
-            this.user = JSON.parse(localStorage.getItem('Mini-CRM.user'))
-            axios.defaults.headers.common['Content-Type'] = 'application/json'
-            axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('Mini-CRM.jwt')
+        components: {
+        Profile, EditProfileComponent
 
+        },
+        beforeMount() {
+            
+            this.user = JSON.parse(localStorage.getItem('user'))
+            axios.defaults.headers.common['Content-Type'] = 'application/json'
+            axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('jwt')
+            //console.log(this.user)
+            //console.log(localStorage.getItem('jwt'))
+
+        },
+        methods: {
+            setComponent(value) {
+                switch(value) {
+                    case "edit-profile":
+                        this.activeComponent = EditProfileComponent
+                         this.$router.push({name: 'dashboard-pages', params: {page: 'edit-profile'}})
+                        break;
+                    default:
+                        this.activeComponent = Profile
+                         this.$router.push({name: 'dashboard-pages', params: {page: 'profile'}})
+                        break;
+                }
+            }
         }
     }
     </script>
