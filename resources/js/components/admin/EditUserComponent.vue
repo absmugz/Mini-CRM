@@ -42,11 +42,12 @@
           <div class="form-group">
            
            <label for="sel1">Select Company:</label>
-  <select class="form-control" v-model="user.company">
+  <select class="form-control" v-model="user.company_id">
     <option v-for="company in companies" :key="company.id" :value="company.id">{{ company.name }}</option>
   </select>
  
           </div>
+          {{ user.company_id }}
         </div>
  
       

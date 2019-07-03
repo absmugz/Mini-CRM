@@ -2347,6 +2347,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -40188,8 +40189,8 @@ var render = function() {
                       {
                         name: "model",
                         rawName: "v-model",
-                        value: _vm.user.company,
-                        expression: "user.company"
+                        value: _vm.user.company_id,
+                        expression: "user.company_id"
                       }
                     ],
                     staticClass: "form-control",
@@ -40205,7 +40206,7 @@ var render = function() {
                           })
                         _vm.$set(
                           _vm.user,
-                          "company",
+                          "company_id",
                           $event.target.multiple
                             ? $$selectedVal
                             : $$selectedVal[0]
@@ -40222,7 +40223,10 @@ var render = function() {
                   }),
                   0
                 )
-              ])
+              ]),
+              _vm._v(
+                "\n          " + _vm._s(_vm.user.company_id) + "\n        "
+              )
             ])
           ]),
           _vm._v(" "),
